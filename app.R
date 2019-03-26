@@ -10,19 +10,21 @@ library(scales)
 library(treemap)
 library(lubridate)
 library(shinycssloaders)
+library(xml2)
+library(lubridate)
+library(SPARQL)
 
 #Loading data
-
 source("xml_collect.R")
 
 # handle parsing errors
 if(next_release_date == "NA NA NA") {
-  if(month(df2$date %>% first())+3 > 12){
-    new_month <- month.name[month(df2$date %>% first()) - 9]
-    new_year <- year(df2$date %>% first()) + 1
+  if(month(df2$date %>% last())+3 > 12){
+    new_month <- month.name[month(df2$date %>% last()) - 9]
+    new_year <- year(df2$date %>% last()) + 1
   } else {
-    new_month <- month.name[month(df2$date %>% first())+3]
-    new_year <- year(df2$date %>% first())
+    new_month <- month.name[month(df2$date %>% last())+3]
+    new_year <- year(df2$date %>% last())
   }
   
   next_release_date <- paste(new_month, new_year, "(Estimated)")
@@ -31,6 +33,8 @@ if(next_release_date == "NA NA NA") {
 
 #collect gdp data
 source("sparql_collect.R")
+
+
 
 #generate graph label
 four_year_ago <- paste0(
