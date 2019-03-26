@@ -57,19 +57,34 @@ df2<- df%>%
   mutate(location = paste0("<a href=",location,">link</a>"))%>%
   #arrange(new_date2) %>%
   filter(publication == "Scotland's Gross Domestic Product: First Estimate") %>%
-  filter(date >= Sys.Date())
+  filter(date <= Sys.Date())
 
 
 release_date<- paste(
-df2$date %>% first() %>% day() %>% ordinal(),
-month.name[df2$date %>% first() %>% month()],
-df2$date %>% first() %>% year()
+df2$date %>% last() %>% day() %>% ordinal(),
+month.name[df2$date %>% last() %>% month()],
+df2$date %>% last() %>% year()
 )
 
+df3<- df%>%
+  rename(publication = publication.i.,
+         date=publication_dates.x.,
+         theme=theme.x.,
+         location=location.x.
+  ) %>%
+  #mutate(new_date = ymd(date)) %>%
+  #mutate(new_date2= if_else(is.na(new_date),
+  #                          dmy(paste0("01",date)),
+  #                          new_date)) %>%
+  mutate(location = paste0("<a href=",location,">link</a>"))%>%
+  #arrange(new_date2) %>%
+  filter(publication == "Scotland's Gross Domestic Product: First Estimate") %>%
+  filter(date > Sys.Date())
+
 next_release_date<-paste(
-  df2$date %>% nth(2) %>% day() %>% ordinal(),
-  month.name[df2$date %>% nth(2) %>% month()],
-  df2$date %>% nth(2) %>% year()
+  df3$date %>% first() %>% day() %>% ordinal(),
+  month.name[df3$date %>% first() %>% month()],
+  df3$date %>% first() %>% year()
 )
 
 rm(df)
