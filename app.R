@@ -11,8 +11,10 @@ library(treemap)
 library(lubridate)
 library(shinycssloaders)
 library(xml2)
-library(lubridate)
 library(SPARQL)
+
+devtools::install_github("DataScienceScotland/opendatascot")
+library(opendatascot)
 
 #Loading data
 source("xml_collect.R")
@@ -32,9 +34,9 @@ if(next_release_date == "NA NA NA") {
 
 
 #collect gdp data
-source("sparql_collect.R")
-
-
+gdp_raw <- opendatascot::ods_dataset("gross-domestic-product-quarterly-output-by-industry")
+current_quarter <- gdp_raw$refPeriod %>%
+  last()
 
 #generate graph label
 four_year_ago <- paste0(
