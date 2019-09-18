@@ -57,7 +57,8 @@ df2<- df%>%
   mutate(location = paste0("<a href=",location,">link</a>"))%>%
   #arrange(new_date2) %>%
   filter(publication == "Scotland's Gross Domestic Product: First Estimate") %>%
-  filter(date <= Sys.Date())
+  filter(date <= Sys.Date()) %>%
+  arrange(date)
 
 
 release_date<- paste(
