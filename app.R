@@ -266,7 +266,7 @@ body <- dashboardBody(
                 "red"
               },
               paste(gdp_annual),
-              icon = if(gdp_quarterly > 0) {
+              icon = if(gdp_annual > 0) {
                 icon("chevron-up", lib="glyphicon")
               } else {
                 icon("chevron-down", lib="glyphicon")
