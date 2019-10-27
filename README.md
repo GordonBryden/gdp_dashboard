@@ -1,3 +1,5 @@
+https://scotland.shinyapps.io/sg-gross-domestic-product-dashboard/
+
 # gdp_dashboard
 
 A simple dashboard to present the latest data from Scottish GDP data, published on the statistics.gov.scot open data platform.
